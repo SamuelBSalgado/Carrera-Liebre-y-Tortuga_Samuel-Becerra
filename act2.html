@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actividad 2</title>
+</head>
+<body>
+    <h1>Simulación de carrera</h1>
+    <h2>TORTUGA VS LIEBRE</h2>
+    <h2>Francisco Samuel Becerra Salgado 3°I</h2>
+    <p>F12 para abrir consola y ver resultados de la carrera ;)</p>
+
+    <style>
+        h1{
+            font-family: Arial, Helvetica, sans-serif;
+        }
+    </style>
+
+    <script>
+        /*<------------- CLASE PARA SIMULAR UN DADO --------------->*/
+        class Dado{
+            tiro(){
+                return Math.floor(Math.random()*100)+1;
+            }
+        }
+        // const dado = new Dado();
+        // dado.tiro();
+        // console.log(dado.tiro()); /*COMENTO PARA INCLUIRLO EN LA CLASE CORREDOR*/
+
+
+        /*<-------------- CLASE CORREDOR QUE AVANCE CASILLAS DE A CUERDO A UN DADO ------------------>*/ 
+        class Corredor{
+            constructor(numero){  //Esta parte sólo es para pedir, si no se necesita pedir algo, no se pone
+                this.posicion = 0;
+                this.dado = new Dado();
+                this.numero=numero;
+            }
+            info(){
+                return this.numero + " está en la posición " + this.posicion + " ";
+            }
+            correrLiebre(){
+                let cara = this.dado.tiro();
+                // this.dado.tiro();
+                if(cara >=1 && cara <=20){
+                    this.posicion+=0;
+                }
+                else if(cara >= 21 && cara <=40) {
+                    this.posicion+=9;
+                }
+                else if(cara >= 41 && cara <= 50){
+                    this.posicion-=12;
+                }
+                else if(cara >= 51 && cara <=85){
+                    this.posicion+=1;
+                }
+                else if(cara >= 86 && cara <=100){
+                    this.posicion-=2;
+                }
+            }
+            correrTortuga(){
+                let cara = this.dado.tiro();
+                // this.dado.tiro();
+                if(cara >= 1 && cara <=50){
+                    this.posicion+=3;
+                }
+                else if(cara >=51 && cara <=70) {
+                    this.posicion-=6;
+                }
+                else if(cara >=71 && cara <=100){
+                    this.posicion+=1;
+                }
+            }
+        }
+
+        // let limite = 100;
+        let liebre = new Corredor("Liebre");
+        let tortuga = new Corredor("Tortuga");
+
+        while(liebre.posicion<100 && tortuga.posicion<100){
+            liebre.correrLiebre();
+            tortuga.correrTortuga();
+            console.log(liebre.info() + tortuga.info());
+            if(liebre.posicion >= 100){
+                console.log("Liebre ganó");
+            }
+            else if(tortuga.posicion >= 100){
+                console.log("Tortuga ganó");
+            }
+            else if(liebre.posicion >=100 && tortuga.posicion >= 100){
+                console.log("Quedaron empatados");
+            }
+        }
+        // liebre.correrLiebre();
+        // tortuga.correrTortuga();
+        </script>
+</body>
+</html>
